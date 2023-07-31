@@ -4,19 +4,64 @@
 // 1 -3,3 8 -9,9
 // 8 7,8 -7,1 9
 
-double[,] CreateDoubleArray(int row, int column)
+// double[,] CreateDoubleArray(int row, int column)
+// {
+//     double[,] doubleArr = new double[row, column];
+//     for (int i = 0; i < row; i++)
+//     {
+//         for (int j = 0; j < column; j++)
+//         {
+//             doubleArr[i, j] = Math.Round(new Random().NextDouble() * 10, 2);
+//         }
+//     }
+//     return doubleArr;
+// }
+// void PrintDoubleArray(double[,] doubleArr)
+// {
+//     int row = doubleArr.GetLength(0);
+//     int column = doubleArr.GetLength(1);
+//     for (int i = 0; i < row; i++)
+//     {
+//         for (int j = 0; j < column; j++)
+//         {
+//             Console.Write($"{doubleArr[i, j]} ");
+//         }
+//         Console.WriteLine();
+//     }
+// }
+
+// PrintDoubleArray(CreateDoubleArray(3, 4));
+
+// Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, 
+// и возвращает значение этого элемента или же указание, что такого элемента нет.
+
+// Например, задан массив:
+// 1 4 7 2
+// 5 9 2 3
+// 8 4 2 4
+// 17 -> такого числа в массиве нет
+
+// Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+
+// Например, задан массив:
+// 1 4 7 2
+// 5 9 2 3
+// 8 4 2 4
+// Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+
+int[,] CreateDoubleArray(int row, int column)
 {
-    double[,] doubleArr = new double[row, column];
+    int[,] doubleArr = new int[row, column];
     for (int i = 0; i < row; i++)
     {
         for (int j = 0; j < column; j++)
         {
-            doubleArr[i, j] = Math.Round(new Random().NextDouble() * 10, 2);
+            doubleArr[i, j] = new Random().Next(0, 10);
         }
     }
     return doubleArr;
 }
-void PrintDoubleArray(double[,] doubleArr)
+void PrintDoubleArray(int[,] doubleArr)
 {
     int row = doubleArr.GetLength(0);
     int column = doubleArr.GetLength(1);
@@ -29,5 +74,33 @@ void PrintDoubleArray(double[,] doubleArr)
         Console.WriteLine();
     }
 }
+double[] FindColumnArithmeticMean(int[,] doubleArr)
+{
+    int row = doubleArr.GetLength(0);
+    int column = doubleArr.GetLength(1);
+    double[] columnArithmeticMeanArray = new double[column];
+    double columnSum = 0;
+    for (int j = 0; j < column; j++)
+    {
+        for (int i = 0; i < row; i++)
+        {
+            columnSum += doubleArr[i, j];
+        }
+        columnArithmeticMeanArray[j] = Math.Round(columnSum / row, 2);
+        columnSum = 0;
+    }
+    return columnArithmeticMeanArray;
+}
+void PrintArray(double[] array)
+{
+    int size = array.Length;
+    for (int i = 0; i < size; i++)
+    {
+        Console.Write($"{array[i]} ");
+    }
+}
 
-PrintDoubleArray(CreateDoubleArray(3, 4));
+int[,] doubleArray = CreateDoubleArray(3, 4);
+PrintDoubleArray(doubleArray);
+double[] columnArithmeticMeanArr = FindColumnArithmeticMean(doubleArray);
+PrintArray (columnArithmeticMeanArr);
