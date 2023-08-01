@@ -70,7 +70,10 @@ void SeachElement(int[,] doubleArr, int firstIndex, int secondIndex)
 {
     int row = doubleArr.GetLength(0);
     int column = doubleArr.GetLength(1);
-    if (firstIndex > row || secondIndex > column)
+    if (firstIndex > row 
+    || secondIndex > column
+    || firstIndex < 0
+    || secondIndex < 0)
     {
         Console.WriteLine($"Элемента с индексом [{firstIndex},{secondIndex}] в данном массиве нет");
     }
